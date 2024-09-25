@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  loading = false;
   authService = inject(AuthService);
   router = inject(Router);
 
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        username: ['', [Validators.required]], 
+        username: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         repeatPassword: ['', [Validators.required]],
       },
@@ -35,20 +36,23 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signupForm.invalid) {
-      this.signupForm.markAllAsTouched(); // Mark all fields as touched if invalid
+      this.signupForm.markAllAsTouched();
       return;
     }
+
+    this.loading = true; // Start loading
 
     const rawForm = this.signupForm.getRawValue();
     this.authService
       .register(rawForm.email, rawForm.password, rawForm.username)
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/login'); // Navigate on success
+          this.loading = false; // End loading
+          this.router.navigateByUrl('/login');
         },
         error: (err) => {
-          console.error('Registration error', err); // Log error
-          // Optionally, show error to user via an error message
+          this.loading = false; // End loading in case of error
+          console.error('Registration error', err);
         },
       });
   }

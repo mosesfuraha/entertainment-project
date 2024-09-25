@@ -4,96 +4,109 @@
   <div>
     <img src="assets/logo.svg" alt="" srcset="" />
   </div>
-  <div class="bg-[#161D2F] p-8 rounded-lg shadow-lg max-w-md w-full">
-    <h2 class="text-2xl font-bold mb-6 text-[#FFFFFF]">Sign Up</h2>
 
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="max-w-md w-full">
+    <div *ngIf="loading" class="flex justify-center mb-4">
+      <div class="loading-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <div *ngIf="!loading">
+      <h2 class="text-2xl font-bold mb-6 text-[#FFFFFF]">Sign Up</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="mb-4">
-        <input
-          type="name"
-          id="name"
-          formControlName="username"
-          class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
-          placeholder="Your Name Please"
-        />
-        <div
-          *ngIf="email?.invalid && email?.touched"
-          class="text-red-500 text-lg"
-        >
-          <small *ngIf="email?.errors?.['required']">Email is required.</small>
-          <small *ngIf="email?.errors?.['email']"
-            >Please enter a valid email address.</small
+          <input
+            type="name"
+            id="name"
+            formControlName="username"
+            class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
+            placeholder="Your Name Please"
+          />
+          <div
+            *ngIf="email?.invalid && email?.touched"
+            class="text-red-500 text-lg"
           >
+            <small *ngIf="email?.errors?.['required']"
+              >Email is required.</small
+            >
+            <small *ngIf="email?.errors?.['email']"
+              >Please enter a valid email address.</small
+            >
+          </div>
         </div>
-      </div>
-      <div class="mb-4">
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
-          placeholder="Email Address"
-        />
-        <div
-          *ngIf="email?.invalid && email?.touched"
-          class="text-red-500 text-lg"
-        >
-          <small *ngIf="email?.errors?.['required']">Email is required.</small>
-          <small *ngIf="email?.errors?.['email']"
-            >Please enter a valid email address.</small
+        <div class="mb-4">
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
+            placeholder="Email Address"
+          />
+          <div
+            *ngIf="email?.invalid && email?.touched"
+            class="text-red-500 text-lg"
           >
+            <small *ngIf="email?.errors?.['required']"
+              >Email is required.</small
+            >
+            <small *ngIf="email?.errors?.['email']"
+              >Please enter a valid email address.</small
+            >
+          </div>
         </div>
-      </div>
 
-      <div class="mb-4">
-        <input
-          type="password"
-          id="password"
-          formControlName="password"
-          class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
-          placeholder="Password"
-        />
-        <div
-          *ngIf="password?.invalid && password?.touched"
-          class="text-red-500 text-lg"
-        >
-          <small *ngIf="password?.errors?.['required']"
-            >Password is required.</small
+        <div class="mb-4">
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
+            placeholder="Password"
+          />
+          <div
+            *ngIf="password?.invalid && password?.touched"
+            class="text-red-500 text-lg"
           >
-          <small *ngIf="password?.errors?.['minlength']"
-            >Password must be at least 6 characters long.</small
+            <small *ngIf="password?.errors?.['required']"
+              >Password is required.</small
+            >
+            <small *ngIf="password?.errors?.['minlength']"
+              >Password must be at least 6 characters long.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <input
+            type="password"
+            id="repeat-password"
+            formControlName="repeatPassword"
+            class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
+            placeholder="Repeat your password"
+          />
+          <div
+            *ngIf="signupForm.errors?.['mismatch'] && repeatPassword?.touched"
+            class="text-red-500 text-lg"
           >
+            <small>Passwords do not match.</small>
+          </div>
         </div>
-      </div>
 
-      <!-- Repeat Password Input -->
-      <div class="mb-6">
-        <input
-          type="password"
-          id="repeat-password"
-          formControlName="repeatPassword"
-          class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
-          placeholder="Repeat your password"
-        />
-        <div
-          *ngIf="signupForm.errors?.['mismatch'] && repeatPassword?.touched"
-          class="text-red-500 text-lg"
+        <button
+          type="submit"
+          class="w-full bg-[#FC4747] text-[#ffffff] text-xl py-3 rounded-md font-medium hover:bg-[#ffffff] hover:text-[#161D2F] transition duration-300"
         >
-          <small>Passwords do not match.</small>
-        </div>
-      </div>
+          Create an Account
+        </button>
+      </form>
 
-      <button
-        type="submit"
-        class="w-full bg-[#FC4747] text-[#ffffff] text-xl py-3 rounded-md font-medium hover:bg-[#ffffff] hover:text-[#161D2F] transition duration-300"
-      >
-        Create an Account
-      </button>
-    </form>
-
-    <p class="text-center text-sm text-gray-400 mt-4">
-      Already have an account?
-      <a href="#" class="text-[#FC4747] font-medium">Login</a>
-    </p>
+      <p class="text-center text-sm text-gray-400 mt-4">
+        Already have an account?
+        <a href="login" class="text-[#FC4747] font-medium">Login</a>
+      </p>
+    </div>
   </div>
 </div>

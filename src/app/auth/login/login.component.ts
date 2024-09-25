@@ -1,10 +1,80 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  loading = false;
+  errorMessage: string | null = null;
 
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Initialize form with validation
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+
+    // Subscribe to form changes to clear error messages when user modifies input
+    this.loginForm.valueChanges.subscribe(() => {
+      this.errorMessage = null; // Clear error messages on value changes
+    });
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched(); 
+      return;
+    }
+
+    const { email, password } = this.loginForm.getRawValue();
+    this.loading = true;
+    this.errorMessage = null; 
+
+    
+    this.authService.login(email, password).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigateByUrl('/entertain');
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = this.getErrorMessage(err); 
+      },
+    });
+  }
+
+  
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  
+  getErrorMessage(error: any): string {
+    switch (error.code) {
+      case 'auth/wrong-password':
+        return 'Incorrect password. Please try again.';
+      case 'auth/user-not-found':
+        return 'No user found with this email. Please check the email address.';
+      case 'auth/too-many-requests':
+        return 'Too many attempts. Please try again later.';
+      default:
+        return 'An unknown error occurred. Please try again.';
+    }
+  }
 }

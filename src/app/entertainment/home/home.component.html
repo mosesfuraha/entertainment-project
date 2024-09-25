@@ -1,0 +1,48 @@
+<div class="p-8 ml-5 font-outfit bg-transparent">
+  <div class="relative flex items-center">
+    <input
+      type="search"
+      placeholder="Search for movies or TV series"
+      class="w-full py-2 pl-10 border-b-2 border-transparent focus:outline-none focus:border-[#161D2F] bg-transparent text-white text-2xl"
+      id="searchInput"
+    />
+    <span class="absolute">
+      <img src="assets/icon-search.svg" alt="Search Icon" class="w-8 h-8" />
+    </span>
+  </div>
+
+  <h2 class="mt-8 text-4xl font-semibold text-white tracking-wide">Trending</h2>
+
+  <div class="mt-8 overflow-x-auto whitespace-nowrap scrollbar-hidden">
+    <div class="flex space-x-6" style="min-width: 100vw">
+      <div *ngFor="let slide of slider" class="inline-block w-1/2">
+        <div
+          class="relative rounded-lg overflow-hidden shadow-lg w-[500px] transition-transform transform hover:scale-105 hover:shadow-2xl hover:bg-opacity-70 duration-300"
+        >
+          <img
+            [src]="slide.imageUrl"
+            alt="{{ slide.title }}"
+            class="w-full h-80 object-cover"
+          />
+
+          <div
+            class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-60 flex flex-col justify-end p-4 text-white transition duration-300"
+          >
+            <h2 class="text-2xl font-bold">{{ slide.title }}</h2>
+            <p class="text-sm">{{ slide.description }}</p>
+          </div>
+          <div
+            class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300"
+          >
+            <button
+              class="bg-[#ffffff2e] text-black font-bold py-4 px-8 w-[160px] rounded-full shadow-lg flex items-center justify-center"
+            >
+              <img src="assets/icon-play.svg" alt="Play Icon" class="h-8 w-8" />
+              <span class="ml-4 text-white">Play</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
