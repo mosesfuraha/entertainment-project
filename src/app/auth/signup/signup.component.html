@@ -8,6 +8,24 @@
     <h2 class="text-2xl font-bold mb-6 text-[#FFFFFF]">Sign Up</h2>
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+        <input
+          type="name"
+          id="name"
+          formControlName="username"
+          class="w-full p-3 bg-transparent border-b border-gray-500 focus:outline-none focus:ring-0 focus:border-blue-500 text-white placeholder-gray-400"
+          placeholder="Your Name Please"
+        />
+        <div
+          *ngIf="email?.invalid && email?.touched"
+          class="text-red-500 text-lg"
+        >
+          <small *ngIf="email?.errors?.['required']">Email is required.</small>
+          <small *ngIf="email?.errors?.['email']"
+            >Please enter a valid email address.</small
+          >
+        </div>
+      </div>
       <div class="mb-4">
         <input
           type="email"
