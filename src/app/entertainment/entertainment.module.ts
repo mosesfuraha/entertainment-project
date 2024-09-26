@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EntertainmentRoutingModule } from './entertainment-routing.module';
@@ -6,18 +6,34 @@ import { EntertainmentComponent } from './entertainment.component';
 import { MoviesComponent } from './movies/movies.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
-
+import { TrendingComponent } from './trending/trending.component';
+import { RecommendedComponent } from './recommended/recommended.component';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { entertainmentReducer } from './store/entertainment.reducers';
+import { EntertainmentEffects } from './store/entertainment.effects';
 
 @NgModule({
   declarations: [
     EntertainmentComponent,
     MoviesComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    TrendingComponent,
+    RecommendedComponent,
   ],
   imports: [
     CommonModule,
-    EntertainmentRoutingModule
-  ]
+    EntertainmentRoutingModule,
+    HttpClientModule,
+
+    StoreModule.forFeature('entertainment', entertainmentReducer),
+
+    EffectsModule.forFeature([EntertainmentEffects]),
+
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 })
-export class EntertainmentModule { }
+export class EntertainmentModule {}

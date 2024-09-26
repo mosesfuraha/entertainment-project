@@ -12,9 +12,8 @@ import { from, Observable } from 'rxjs';
 })
 export class AuthService {
   firebaseAuth = inject(Auth);
+  private loggedIn = false;
 
-  //firebase does not return observables it returns promises which ir regarded  not as a best practice
-  //we have to return observables since are the one which one work well with angular
   register(
     email: string,
     password: string,
@@ -24,9 +23,10 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then((response) =>
-      updateProfile(response.user, { displayName: username })
-    );
+    ).then((response) => {
+      this.loggedIn = true; // Set loggedIn to true when registered successfully
+      return updateProfile(response.user, { displayName: username });
+    });
     return from(promise);
   }
 
@@ -35,7 +35,17 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then(() => {});
+    ).then(() => {
+      this.loggedIn = true; // Set loggedIn to true when logged in successfully
+    });
     return from(promise);
+  }
+
+  isAuthenticated(): boolean {
+    return this.loggedIn; // Return the current authentication state
+  }
+
+  logout(): void {
+    this.loggedIn = false; // Reset the login state on logout
   }
 }

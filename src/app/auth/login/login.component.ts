@@ -34,15 +34,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched(); 
+      this.loginForm.markAllAsTouched();
       return;
     }
 
     const { email, password } = this.loginForm.getRawValue();
     this.loading = true;
-    this.errorMessage = null; 
+    this.errorMessage = null;
 
-    
     this.authService.login(email, password).subscribe({
       next: () => {
         this.loading = false;
@@ -50,12 +49,14 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = this.getErrorMessage(err); 
+        this.errorMessage = this.getErrorMessage(err);
       },
     });
   }
+  navigateToSignUp(): void {
+    this.router.navigateByUrl('/signup');
+  }
 
-  
   get email() {
     return this.loginForm.get('email');
   }
@@ -64,7 +65,6 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  
   getErrorMessage(error: any): string {
     switch (error.code) {
       case 'auth/wrong-password':
