@@ -1,11 +1,11 @@
 <div class="p-8 font-outfit">
   <h2 class="text-4xl font-semibold text-[#ffffff] tracking-wide mb-8">
-    Recommended Works
+    TV Series
   </h2>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <div
-      *ngFor="let slide of recommendedContent$ | async"
+      *ngFor="let slide of tvSeriesContent$ | async"
       class="relative rounded-lg shadow-md overflow-hidden group"
     >
       <div class="relative overflow-hidden">
@@ -40,27 +40,19 @@
           </button>
         </div>
       </div>
+
       <div class="p-4">
         <p class="text-sm text-gray-400 flex items-center space-x-2">
           <span>{{ slide.year }} | </span>
-
-          <img
-            *ngIf="slide.category === 'Movie'"
-            src="assets/icon-category-movie.svg"
-            alt="Movie Icon"
-            class="h-4 w-4"
-          />
-
           <img
             *ngIf="slide.category === 'TV Series'"
             src="assets/icon-category-tv.svg"
             alt="TV Series Icon"
             class="h-4 w-4"
           />
-
           <span>{{ slide.category }} | {{ slide.rating }}</span>
         </p>
-        <span class="text-white text-sm font-semibold">{{ slide.title }}</span>
+        <h3 class="text-lg text-[#ffffff] font-semibold">{{ slide.title }}</h3>
       </div>
     </div>
   </div>

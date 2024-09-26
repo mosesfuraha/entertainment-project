@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entertainmentReducer } from './store/entertainment.reducers';
 import { EntertainmentEffects } from './store/entertainment.effects';
+import { TvSeriesComponent } from './tv-series/tv-series.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EntertainmentEffects } from './store/entertainment.effects';
     HomeComponent,
     TrendingComponent,
     RecommendedComponent,
+    TvSeriesComponent,
   ],
   imports: [
     CommonModule,

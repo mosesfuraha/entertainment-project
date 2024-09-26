@@ -2,5 +2,7 @@
   class="entertainment-container flex flex-col md:flex-row h-screen bg-[#10141E]"
 >
   <app-sidebar class="w-full md:w-[11%]"></app-sidebar>
-  <app-home class="w-full md:w-[87%]"></app-home>
+  <div class="w-full md:w-[87%]">
+    <router-outlet></router-outlet>
+  </div>
 </div>

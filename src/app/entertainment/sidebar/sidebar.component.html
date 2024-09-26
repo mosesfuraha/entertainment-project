@@ -5,36 +5,57 @@
     <img src="/assets/logo.svg" alt="logo" />
   </button>
   <div class="xl:hidden flex gap-4 sm:gap-6 items-center xl:flex-col">
-    <button>
-      <img src="/assets/icon-nav-home.svg" alt="home-icon" />
-    </button>
-    <button>
-      <img src="/assets/icon-nav-movies.svg" alt="movie-icon" />
-    </button>
-    <button>
-      <img src="/assets/icon-nav-tv-series.svg" alt="tv-series-icon" />
-    </button>
-    <button>
-      <img src="/assets/icon-nav-bookmark.svg" alt="" />
-    </button>
+    <a routerLink="home" routerLinkActive="active">
+      <img
+        src="/assets/icon-nav-home.svg"
+        alt="home-icon"
+        class="icon first-active"
+      />
+    </a>
+    <a routerLink="movies" routerLinkActive="active">
+      <img src="/assets/icon-nav-movies.svg" alt="movie-icon" class="icon" />
+    </a>
+    <a routerLink="tv-series" routerLinkActive="active">
+      <img
+        src="/assets/icon-nav-tv-series.svg"
+        alt="tv-series-icon"
+        class="icon"
+      />
+    </a>
+    <a routerLink="bookmarks" routerLinkActive="active">
+      <img
+        src="/assets/icon-nav-bookmark.svg"
+        alt="bookmark-icon"
+        class="icon"
+      />
+    </a>
   </div>
+
   <div class="hidden xl:flex xl:flex-col xl:gap-20">
     <button class="bg-slate- w-20 flex justify-center">
       <img src="/assets/logo.svg" alt="logo" />
     </button>
     <div class="flex gap-4 sm:gap-6 items-center xl:flex-col">
-      <button>
-        <img src="/assets/icon-nav-home.svg" alt="home-icon" />
-      </button>
-      <button>
-        <img src="/assets/icon-nav-movies.svg" alt="movie-icon" />
-      </button>
-      <button>
-        <img src="/assets/icon-nav-tv-series.svg" alt="tv-series-icon" />
-      </button>
-      <button>
-        <img src="/assets/icon-nav-bookmark.svg" alt="" />
-      </button>
+      <a routerLink="entertain" routerLinkActive="active">
+        <img src="/assets/icon-nav-home.svg" alt="home-icon" class="icon" />
+      </a>
+      <a routerLink="movies" routerLinkActive="active">
+        <img src="/assets/icon-nav-movies.svg" alt="movie-icon" class="icon" />
+      </a>
+      <a routerLink="tv-series" routerLinkActive="active">
+        <img
+          src="/assets/icon-nav-tv-series.svg"
+          alt="tv-series-icon"
+          class="icon"
+        />
+      </a>
+      <a routerLink="bookmarks" routerLinkActive="active">
+        <img
+          src="/assets/icon-nav-bookmark.svg"
+          alt="bookmark-icon"
+          class="icon"
+        />
+      </a>
     </div>
   </div>
   <div class="border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer">

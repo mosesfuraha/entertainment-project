@@ -24,7 +24,7 @@ export class AuthService {
       email,
       password
     ).then((response) => {
-      this.loggedIn = true; // Set loggedIn to true when registered successfully
+      this.loggedIn = true; 
       return updateProfile(response.user, { displayName: username });
     });
     return from(promise);
@@ -36,16 +36,16 @@ export class AuthService {
       email,
       password
     ).then(() => {
-      this.loggedIn = true; // Set loggedIn to true when logged in successfully
+      this.loggedIn = true; 
     });
     return from(promise);
   }
 
   isAuthenticated(): boolean {
-    return this.loggedIn; // Return the current authentication state
+    return this.loggedIn; 
   }
 
   logout(): void {
-    this.loggedIn = false; // Reset the login state on logout
+    this.loggedIn = false; 
   }
 }

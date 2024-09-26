@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard'; // Import the AuthGuard
+import { AuthGuard } from './auth/auth.guard'; 
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'entertain' },
 ];
 
 @NgModule({
