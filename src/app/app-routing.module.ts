@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './auth/auth.guard'; 
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
@@ -13,9 +13,9 @@ const routes: Routes = [
       import('./entertainment/entertainment.module').then(
         (m) => m.EntertainmentModule
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: 'entertain' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
