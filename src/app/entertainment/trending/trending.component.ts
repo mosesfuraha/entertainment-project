@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ContentItem } from '../models/data.interface';
@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './trending.component.html',
   styleUrls: ['./trending.component.css'],
 })
-export class TrendingComponent implements OnChanges {
+export class TrendingComponent implements OnInit, OnChanges {
   @Input() searchTerm: string | null = '';
   trendingContent$!: Observable<ContentItem[]>;
 
@@ -30,26 +30,22 @@ export class TrendingComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this.trendingContent$ = this.store
-      .select(selectAllEntertainment)
-      .pipe(
-        map((content: ContentItem[]) =>
-          content.filter(
-            (item) =>
-              item.isTrending &&
-              (this.searchTerm
-                ? item.title
-                    .toLowerCase()
-                    .includes(this.searchTerm.toLowerCase()) ||
-                  item.category
-                    .toLowerCase()
-                    .includes(this.searchTerm.toLowerCase()) ||
-                  item.rating
-                    .toLowerCase()
-                    .includes(this.searchTerm.toLowerCase())
-                : true)
-          )
-        )
-      );
+    this.trendingContent$ = this.store.select(selectAllEntertainment).pipe(
+      map((content: ContentItem[]) =>
+        content.filter((item) => {
+          const matchesSearchTerm = this.searchTerm
+            ? item.title
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+              item.category
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+              item.rating.toLowerCase().includes(this.searchTerm.toLowerCase())
+            : true;
+
+          return item.isTrending && matchesSearchTerm;
+        })
+      )
+    );
   }
 }

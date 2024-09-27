@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entertainmentReducer } from './store/entertainment.reducers';
 import { EntertainmentEffects } from './store/entertainment.effects';
 import { TvSeriesComponent } from './tv-series/tv-series.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TvSeriesComponent } from './tv-series/tv-series.component';
     TrendingComponent,
     RecommendedComponent,
     TvSeriesComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,13 @@
+<div class="relative flex items-center">
+  <input
+    type="search"
+    placeholder="Search for movies or TV series"
+    class="w-full py-2 pl-10 border-b-2 border-transparent focus:outline-none focus:border-[#161D2F] bg-transparent text-white text-2xl"
+    id="searchInput"
+    (input)="onSearch($event)"
+  />
+
+  <span class="absolute">
+    <img src="assets/icon-search.svg" alt="Search Icon" class="w-8 h-8" />
+  </span>
+</div>
