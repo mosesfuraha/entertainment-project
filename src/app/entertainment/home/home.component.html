@@ -1,6 +1,8 @@
 <div class="p-8 ml-5 font-outfit bg-transparent">
-  <app-search (search)="search($event)"></app-search>
+  <div class="ml-5">
+    <app-search (search)="search($event)"></app-search>
 
-  <app-trending [searchTerm]="searchTerms | async"></app-trending>
-  <app-recommended [searchTerm]="searchTerms | async"></app-recommended>
+    <app-trending [searchTerm]="searchTerms | async"></app-trending>
+    <app-recommended [searchTerm]="searchTerms | async"></app-recommended>
+  </div>
 </div>

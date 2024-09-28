@@ -5,6 +5,7 @@ import {
   loadContent,
   loadContentFailure,
   loadContentSuccess,
+  markMovieBooked,
 } from './entertainment.action';
 import { selectEntertainmentState } from './entertainment.selectors';
 
@@ -43,7 +44,16 @@ export const entertainmentReducer = createReducer(
     ...state,
     error,
     loading: false,
-  }))
+  })),
+  on(markMovieBooked, (state, { movieId, ismovieBooked }) =>
+    adapter.updateOne(
+      {
+        id: movieId,
+        changes: { isBookmarked: ismovieBooked },
+      },
+      state
+    )
+  )
 );
 
 export const {

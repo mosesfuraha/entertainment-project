@@ -4,6 +4,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { EntertainmentComponent } from './entertainment.component';
 import { HomeComponent } from './home/home.component';
 import { TvSeriesComponent } from './tv-series/tv-series.component';
+import { BookedMoviesComponent } from './booked-movies/booked-movies.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'movies', component: MoviesComponent },
       { path: 'home', component: HomeComponent },
       { path: 'tv-series', component: TvSeriesComponent },
+      { path: 'booked', component: BookedMoviesComponent },
     ],
   },
 ];

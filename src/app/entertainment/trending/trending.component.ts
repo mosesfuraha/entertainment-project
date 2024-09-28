@@ -7,6 +7,7 @@ import {
   selectAllEntertainment,
 } from '../store/entertainment.reducers';
 import { map } from 'rxjs/operators';
+import { markMovieBooked } from '../store/entertainment.action';
 
 @Component({
   selector: 'app-trending',
@@ -46,6 +47,15 @@ export class TrendingComponent implements OnInit, OnChanges {
           return item.isTrending && matchesSearchTerm;
         })
       )
+    );
+  }
+
+  toggleBookmark(item: ContentItem): void {
+    this.store.dispatch(
+      markMovieBooked({
+        movieId: item.id,
+        ismovieBooked: !item.isBookmarked,
+      })
     );
   }
 }

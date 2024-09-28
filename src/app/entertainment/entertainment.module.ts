@@ -16,6 +16,7 @@ import { entertainmentReducer } from './store/entertainment.reducers';
 import { EntertainmentEffects } from './store/entertainment.effects';
 import { TvSeriesComponent } from './tv-series/tv-series.component';
 import { SearchComponent } from './search/search.component';
+import { BookedMoviesComponent } from './booked-movies/booked-movies.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SearchComponent } from './search/search.component';
     RecommendedComponent,
     TvSeriesComponent,
     SearchComponent,
+    BookedMoviesComponent,
   ],
   imports: [
     CommonModule,

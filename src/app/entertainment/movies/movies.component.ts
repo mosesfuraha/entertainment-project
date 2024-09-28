@@ -6,7 +6,8 @@ import {
   AppState,
   selectAllEntertainment,
 } from '../store/entertainment.reducers';
-import { SearchService } from '../services/search.service'; // Make sure to import the SearchService
+import { SearchService } from '../services/search.service';
+import { markMovieBooked } from '../store/entertainment.action';
 
 @Component({
   selector: 'app-movies',
@@ -14,17 +15,16 @@ import { SearchService } from '../services/search.service'; // Make sure to impo
   styleUrls: ['./movies.component.css'],
 })
 export class MoviesComponent implements OnInit {
-  @Input() searchTerm: string | null = ''; 
+  @Input() searchTerm: string | null = '';
   moviesContent$!: Observable<ContentItem[]>;
 
   constructor(
     private store: Store<AppState>,
-    private searchService: SearchService 
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
     this.loadMoviesContent();
-
 
     this.searchService
       .getFilteredContent(this.moviesContent$)
@@ -48,5 +48,13 @@ export class MoviesComponent implements OnInit {
 
   onSearch(term: string): void {
     this.searchService.search(term);
+  }
+  toggleBookmark(movie: ContentItem): void {
+    this.store.dispatch(
+      markMovieBooked({
+        movieId: movie.id,
+        ismovieBooked: !movie.isBookmarked,
+      })
+    );
   }
 }

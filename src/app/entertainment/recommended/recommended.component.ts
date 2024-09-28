@@ -7,6 +7,7 @@ import {
   AppState,
   selectAllEntertainment,
 } from '../store/entertainment.reducers';
+import { markMovieBooked } from '../store/entertainment.action';
 
 @Component({
   selector: 'app-recommended',
@@ -49,5 +50,16 @@ export class RecommendedComponent implements OnInit, OnChanges {
           )
         )
       );
+  }
+
+
+
+   toggleBookmark(item: ContentItem): void {
+    this.store.dispatch(
+      markMovieBooked({
+        movieId: item.id,
+        ismovieBooked: !item.isBookmarked,
+      })
+    );
   }
 }

@@ -4,7 +4,7 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
@@ -13,9 +13,9 @@ const routes: Routes = [
       import('./entertainment/entertainment.module').then(
         (m) => m.EntertainmentModule
       ),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'entertain' },
 ];
 
 @NgModule({

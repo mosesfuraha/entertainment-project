@@ -12,12 +12,21 @@
       >
         <div class="relative overflow-hidden">
           <div
-            class="absolute top-3 right-4 bg-[#161d2f58] p-2 rounded-full z-10"
+            class="absolute top-3 right-4 bg-[#161d2f58] p-2 rounded-full z-10 transition duration-300 cursor-pointer"
+            (click)="toggleBookmark(slide)"
           >
             <img
+              *ngIf="!slide.isBookmarked"
               src="assets/icon-bookmark-empty.svg"
               alt="Bookmark Icon"
-              class="h-4 w-4"
+              class="h-4 w-4 transition-transform duration-300 ease-in-out transform hover:scale-110"
+            />
+
+            <img
+              *ngIf="slide.isBookmarked"
+              src="assets/icon-bookmark-full.svg"
+              alt="Bookmark Icon Filled"
+              class="h-4 w-4 transition-transform duration-300 ease-in-out transform hover:scale-110"
             />
           </div>
 

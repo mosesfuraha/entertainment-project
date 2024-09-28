@@ -7,6 +7,7 @@ import {
   selectAllEntertainment,
 } from '../store/entertainment.reducers';
 import { SearchService } from '../services/search.service';
+import { markMovieBooked } from '../store/entertainment.action';
 
 @Component({
   selector: 'app-tv-series',
@@ -47,5 +48,13 @@ export class TvSeriesComponent implements OnInit {
 
   onSearch(term: string): void {
     this.searchService.search(term);
+  }
+  toggleBookmark(movie: ContentItem): void {
+    this.store.dispatch(
+      markMovieBooked({
+        movieId: movie.id,
+        ismovieBooked: !movie.isBookmarked,
+      })
+    );
   }
 }

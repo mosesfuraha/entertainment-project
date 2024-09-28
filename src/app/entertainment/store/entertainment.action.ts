@@ -12,3 +12,8 @@ export const loadContentFailure = createAction(
   '[Entertainment] Load Content Failure',
   props<{ error: string }>()
 );
+
+export const markMovieBooked = createAction(
+  '[Entertainment] Mark Movie Booked',
+  props<{ movieId: string; ismovieBooked: boolean }>()
+);
