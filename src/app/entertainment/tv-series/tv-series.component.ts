@@ -77,8 +77,8 @@ export class TvSeriesComponent implements OnInit {
                 text: 'Error: Unable to identify user. Please try again.',
                 duration: 3000,
                 close: true,
-                gravity: 'top',
-                position: 'right',
+                // gravity: 'top',
+                // position: 'right',
                 stopOnFocus: true,
                 style: {
                   background: '#ff5a5f',
@@ -91,8 +91,8 @@ export class TvSeriesComponent implements OnInit {
           text: 'Please log in to bookmark movies.',
           duration: 3000,
           close: true,
-          gravity: 'top',
-          position: 'right',
+          // gravity: 'top',
+          // position: 'right',
           stopOnFocus: true,
           style: {
             background: '#ff5a5f',
