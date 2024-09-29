@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('home');
       },
       error: (err) => {
         this.loading = false;

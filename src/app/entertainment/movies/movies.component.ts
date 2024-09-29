@@ -80,8 +80,10 @@ export class MoviesComponent implements OnInit {
                 close: true,
                 gravity: 'top',
                 position: 'right',
-                backgroundColor: '#ff5a5f',
                 stopOnFocus: true,
+                style: {
+                  background: '#ff5a5f',
+                },
               }).showToast();
             }
           });
@@ -92,8 +94,10 @@ export class MoviesComponent implements OnInit {
           close: true,
           gravity: 'top',
           position: 'right',
-          backgroundColor: '#ff5a5f',
           stopOnFocus: true,
+          style: {
+            background: '#ff5a5f',
+          },
         }).showToast();
       }
     });
