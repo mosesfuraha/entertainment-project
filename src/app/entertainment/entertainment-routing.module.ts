@@ -11,9 +11,9 @@ const routes: Routes = [
     path: '',
     component: EntertainmentComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', redirectTo: '', pathMatch: 'full' },
       { path: 'movies', component: MoviesComponent },
-      { path: 'home', component: HomeComponent },
+      { path: '', component: HomeComponent },
       { path: 'tv-series', component: TvSeriesComponent },
       { path: 'booked', component: BookedMoviesComponent },
     ],
