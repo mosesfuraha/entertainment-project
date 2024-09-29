@@ -15,5 +15,6 @@ export const loadContentFailure = createAction(
 
 export const markMovieBooked = createAction(
   '[Entertainment] Mark Movie Booked',
-  props<{ movieId: string; ismovieBooked: boolean }>()
+  props<{ movieId: string; ismovieBooked: boolean; userId: string | null }>() 
 );
+

@@ -1,13 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { ContentItem } from '../models/data.interface';
 import {
   AppState,
   selectAllEntertainment,
 } from '../store/entertainment.reducers';
 import { SearchService } from '../services/search.service';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 import { markMovieBooked } from '../store/entertainment.action';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-movies',
@@ -17,10 +20,12 @@ import { markMovieBooked } from '../store/entertainment.action';
 export class MoviesComponent implements OnInit {
   @Input() searchTerm: string | null = '';
   moviesContent$!: Observable<ContentItem[]>;
+  isLoggedIn$!: Observable<boolean>;
 
   constructor(
     private store: Store<AppState>,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +39,7 @@ export class MoviesComponent implements OnInit {
           observer.complete();
         });
       });
+    this.isLoggedIn$ = this.authService.isAuthenticated();
   }
 
   private loadMoviesContent(): void {
@@ -41,7 +47,9 @@ export class MoviesComponent implements OnInit {
       .select(selectAllEntertainment)
       .pipe(
         map((content: ContentItem[]) =>
-          content.filter((item) => item.category === 'Movie')
+          content.filter(
+            (item) => item.category === 'Movie' && !item.isBookmarked
+          )
         )
       );
   }
@@ -49,12 +57,45 @@ export class MoviesComponent implements OnInit {
   onSearch(term: string): void {
     this.searchService.search(term);
   }
-  toggleBookmark(movie: ContentItem): void {
-    this.store.dispatch(
-      markMovieBooked({
-        movieId: movie.id,
-        ismovieBooked: !movie.isBookmarked,
-      })
-    );
+
+  toggleBookmark(item: ContentItem): void {
+    this.isLoggedIn$.pipe(take(1)).subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.authService
+          .getCurrentUser()
+          .pipe(take(1))
+          .subscribe((user) => {
+            if (user && user.uid) {
+              this.store.dispatch(
+                markMovieBooked({
+                  movieId: item.id,
+                  ismovieBooked: !item.isBookmarked,
+                  userId: user.uid,
+                })
+              );
+            } else {
+              Toastify({
+                text: 'Error: Unable to identify user. Please try again.',
+                duration: 3000,
+                close: true,
+                gravity: 'top',
+                position: 'right',
+                backgroundColor: '#ff5a5f',
+                stopOnFocus: true,
+              }).showToast();
+            }
+          });
+      } else {
+        Toastify({
+          text: 'Please log in to bookmark movies.',
+          duration: 3000,
+          close: true,
+          gravity: 'top',
+          position: 'right',
+          backgroundColor: '#ff5a5f',
+          stopOnFocus: true,
+        }).showToast();
+      }
+    });
   }
 }

@@ -40,18 +40,18 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.loading = true; // Start loading
+    this.loading = true;
 
     const rawForm = this.signupForm.getRawValue();
     this.authService
       .register(rawForm.email, rawForm.password, rawForm.username)
       .subscribe({
         next: () => {
-          this.loading = false; // End loading
-          this.router.navigateByUrl('/login');
+          this.loading = false;
+          this.router.navigateByUrl('auth');
         },
         error: (err) => {
-          this.loading = false; // End loading in case of error
+          this.loading = false;
           console.error('Registration error', err);
         },
       });
@@ -71,5 +71,9 @@ export class SignupComponent implements OnInit {
 
   get repeatPassword() {
     return this.signupForm.get('repeatPassword');
+  }
+
+  navigateToLogin(): void {
+    this.router.navigateByUrl('auth');
   }
 }

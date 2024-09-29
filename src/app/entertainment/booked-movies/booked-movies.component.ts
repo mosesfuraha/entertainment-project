@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
 import { ContentItem } from '../models/data.interface';
-import {
-  AppState,
-  selectAllEntertainment,
-} from '../store/entertainment.reducers';
+import { AppState } from '../store/entertainment.reducers';
+import { selectBookmarkedMoviesByUser } from '../store/entertainment.selectors';
+import { AuthService } from '../../auth/auth.service';
 import { markMovieBooked } from '../store/entertainment.action';
 
 @Component({
@@ -16,27 +15,37 @@ import { markMovieBooked } from '../store/entertainment.action';
 })
 export class BookedMoviesComponent implements OnInit {
   bookedMovies$!: Observable<ContentItem[]>;
+  userId!: string | null;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.loadBookedMovies();
+    this.authService
+      .getCurrentUser()
+      ?.pipe(
+        filter((user) => !!user),
+        switchMap((user) => {
+          this.userId = user.uid;
+          console.log('User logged in with ID:', this.userId);
+          this.bookedMovies$ = this.store.select(
+            selectBookmarkedMoviesByUser(this.userId)
+          );
+          return this.bookedMovies$;
+        })
+      )
+      .subscribe();
   }
 
-  private loadBookedMovies(): void {
-    this.bookedMovies$ = this.store
-      .select(selectAllEntertainment)
-      .pipe(
-        map((content: ContentItem[]) =>
-          content.filter((item) => item.isBookmarked)
-        )
-      );
-  }
   toggleBookmark(movie: ContentItem): void {
+    console.log('Toggling bookmark for movie:', movie.title);
     this.store.dispatch(
       markMovieBooked({
         movieId: movie.id,
         ismovieBooked: !movie.isBookmarked,
+        userId: this.userId,
       })
     );
   }

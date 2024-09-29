@@ -1,15 +1,17 @@
-<div class="p-8 font-outfit">
+<div class="font-outfit">
   <h2 class="text-4xl font-semibold text-[#ffffff] tracking-wide mb-8">
     Recommended Works
   </h2>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div
+    class="grid grid-cols-1 max-sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-6"
+  >
     <div
       *ngFor="let slide of recommendedContent$ | async"
       class="relative rounded-lg shadow-md overflow-hidden group"
     >
       <div class="relative overflow-hidden">
-         <div
+        <div
           class="absolute top-3 right-4 bg-[#161d2f58] p-2 rounded-full z-10 transition duration-300 cursor-pointer"
           (click)="toggleBookmark(slide)"
         >

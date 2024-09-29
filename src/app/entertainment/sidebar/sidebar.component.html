@@ -58,11 +58,32 @@
       </a>
     </div>
   </div>
-  <div class="border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer">
+  <div
+    class="border-[3px] rounded-full w-[50px] h-[50px] cursor-pointer relative"
+    (click)="togglePopup()"
+  >
     <img
       src="/assets/image-avatar.png"
       alt="profile"
       class="w-full h-full object-cover"
     />
+
+    <div
+      *ngIf="showPopup"
+      class="absolute left-16 top-[-50px] ml-7 w-56 py-3 px-3 bg-[#161D2F] rounded-lg shadow-2xl text-black z-50"
+    >
+      <button
+        class="block font-semibold w-full h-[30px] bg-[#FC4747] text-white rounded-md text-center"
+        (click)="navigateToSignup()"
+      >
+        Sign Up
+      </button>
+      <button
+        class="block w-full font-semibold mt-4 h-[30px] bg-[#FC4747] text-center text-white rounded-md"
+        (click)="navigateToLogin()"
+      >
+        Login
+      </button>
+    </div>
   </div>
 </div>

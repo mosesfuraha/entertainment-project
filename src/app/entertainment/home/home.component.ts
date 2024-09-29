@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { loadContent } from '../store/entertainment.action';
-import {
-  AppState,
-  selectAllEntertainment,
-} from '../store/entertainment.reducers';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ContentItem } from '../models/data.interface';
 import { SearchService } from '../services/search.service';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -18,23 +12,23 @@ import { tap } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   content$!: Observable<ContentItem[]>;
   filteredContent$!: Observable<ContentItem[]>;
-  searchTerms = new BehaviorSubject<string>(''); // Initialize BehaviorSubject with an empty string
-  searchMessage: string = ''; // Message for search results
+  searchTerms = new BehaviorSubject<string>('');
+  searchMessage: string = '';
 
-  constructor(
-    private store: Store<AppState>,
-    private searchService: SearchService
-  ) {}
+  constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadContent());
+    const storedContent = localStorage.getItem('content');
 
-    // Get the content from the store
-    this.content$ = this.store.pipe(select(selectAllEntertainment));
+    if (storedContent) {
+      const parsedContent: ContentItem[] = JSON.parse(storedContent);
+      this.content$ = of(parsedContent);
+    } else {
+      console.error('No data in localStorage');
+    }
 
-    // Pass content$ to the SearchService and handle filtered results
     this.filteredContent$ = this.searchService
-      .getFilteredContent(this.content$) // Pass content$ to the search service
+      .getFilteredContent(this.content$)
       .pipe(tap((filteredItems) => this.updateSearchMessage(filteredItems)));
   }
 
@@ -56,4 +50,3 @@ export class HomeComponent implements OnInit {
     }
   }
 }
-

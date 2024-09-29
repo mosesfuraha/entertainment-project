@@ -45,11 +45,14 @@ export const entertainmentReducer = createReducer(
     error,
     loading: false,
   })),
-  on(markMovieBooked, (state, { movieId, ismovieBooked }) =>
+  on(markMovieBooked, (state, { movieId, ismovieBooked, userId }) =>
     adapter.updateOne(
       {
         id: movieId,
-        changes: { isBookmarked: ismovieBooked },
+        changes: {
+          isBookmarked: ismovieBooked,
+          userId: userId, // Add userId to the changes
+        },
       },
       state
     )

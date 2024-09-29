@@ -20,15 +20,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize form with validation
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
-    // Subscribe to form changes to clear error messages when user modifies input
     this.loginForm.valueChanges.subscribe(() => {
-      this.errorMessage = null; // Clear error messages on value changes
+      this.errorMessage = null;
     });
   }
 
@@ -45,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigateByUrl('/entertain');
+        this.router.navigateByUrl('home');
       },
       error: (err) => {
         this.loading = false;
@@ -54,7 +52,7 @@ export class LoginComponent implements OnInit {
     });
   }
   navigateToSignUp(): void {
-    this.router.navigateByUrl('/signup');
+    this.router.navigateByUrl('auth/signup');
   }
 
   get email() {

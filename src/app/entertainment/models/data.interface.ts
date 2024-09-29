@@ -21,6 +21,7 @@ export interface ContentItem {
   rating: string;
   isBookmarked: boolean;
   isTrending: boolean;
+  userId?: string | null;
 }
 export function addIdToContentItem(
   content: Omit<ContentItem, 'id'>

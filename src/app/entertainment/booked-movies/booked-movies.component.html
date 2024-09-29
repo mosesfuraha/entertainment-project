@@ -1,13 +1,18 @@
-<div class=" ml-5 font-outfit bg-transparent">
-  <div class="p-8">
-    <app-search></app-search>
-    <h2 class="text-4xl font-semibold text-[#ffffff] tracking-wide mt-8">
+<div class="lg:p-8 md:p-8 font-outfit bg-transparent ml-5">
+  <div class="">
+    <div class="mt-6 mb-3">
+      <app-search></app-search>
+    </div>
+
+    <h2 class="text-4xl font-semibold text-white tracking-wide mt-8">
       Bookmarked Movies
     </h2>
 
     <div *ngIf="bookedMovies$ | async as bookedMovies; else noBookmarks">
       <div *ngIf="bookedMovies.length > 0; else noBookmarks">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+        <div
+          class="grid grid-cols-1 max-sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-6 mt-4"
+        >
           <div
             *ngFor="let movie of bookedMovies"
             class="relative rounded-lg shadow-md overflow-hidden group"
@@ -31,18 +36,19 @@
                 />
               </div>
 
+              <!-- Movie thumbnail -->
               <img
                 [src]="movie.thumbnail.regular.large"
                 alt="{{ movie.title }}"
                 class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 rounded-lg"
               />
 
-              <!-- Overlay on Hover -->
+              <!-- Hover overlay effect -->
               <div
                 class="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300"
               ></div>
 
-              <!-- Play Button -->
+              <!-- Play button on hover -->
               <div
                 class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
@@ -59,7 +65,7 @@
               </div>
             </div>
 
-            <!-- Movie Info -->
+            <!-- Movie information -->
             <div class="p-4">
               <p class="text-sm text-gray-400 flex items-center space-x-2">
                 <span>{{ movie.year }} | </span>
@@ -70,7 +76,6 @@
                   alt="Movie Icon"
                   class="h-4 w-4"
                 />
-
                 <img
                   *ngIf="movie.category === 'TV Series'"
                   src="assets/icon-category-tv.svg"
@@ -89,6 +94,7 @@
       </div>
     </div>
 
+    <!-- No bookmarks message -->
     <ng-template #noBookmarks>
       <p class="text-white">No movies are bookmarked!</p>
     </ng-template>
