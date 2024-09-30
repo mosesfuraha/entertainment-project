@@ -9,7 +9,7 @@ Check out the live version of the project [here](https://moses-entertainment-pro
 ## Features
 
 - **Bookmarking**: Users can easily add movies or TV shows to their personalized bookmark list for quick access later. 
-  - *Note for new users*: If you attempt to bookmark content while not logged in, you'll be prompted to create an account. Simply click on the profile avatar in the top right corner to sign up or log in, ensuring your bookmarks are saved and accessible across sessions.
+  - *Note for new users*: If you attempt to bookmark content while not logged in, you'll be prompted to create an account. Simply click on the profile avatar in the down right corner to sign up or log in, ensuring your bookmarks are saved and accessible across sessions.
 
 - **Authentication**: Secure user authentication is implemented, allowing users to sign up, log in, and manage their accounts safely. This ensures a personalized experience for each user.
 
