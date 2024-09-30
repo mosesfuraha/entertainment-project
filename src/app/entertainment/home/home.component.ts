@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.searchService.search(term);
   }
 
-  private updateSearchMessage(filteredItems: ContentItem[]): void {
+  public updateSearchMessage(filteredItems: ContentItem[]): void {
     const numResults = filteredItems.length;
     const searchTerm = this.searchTerms.getValue();
 
