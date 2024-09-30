@@ -4,7 +4,7 @@ This project was generated with Angular CLI version 18.2.0.
 
 ## Project Link
 
-Check out the live version of the project [here](#).
+Check out the live version of the project [here](https://moses-entertainment-project.vercel.app/home).
 
 ## Features
 
