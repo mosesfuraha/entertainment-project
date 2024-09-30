@@ -1,12 +1,23 @@
 # EntertainmentProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+This project was generated with Angular CLI version 18.2.0.
 
-## Development server
+## Project Link
+
+Check out the live version of the project [here](#).
+
+## Features
+
+- **Bookmarking**: Users can easily add movies or TV shows to their personalized bookmark list for quick access later.
+- **Authentication**: Secure user authentication is implemented, allowing users to sign up, log in, and manage their accounts safely. This ensures a personalized experience for each user.
+- **Dynamic Content**: The project dynamically loads trending movies and TV shows, displaying recommendations based on user preferences.
+- **Search Functionality**: Users can search for specific movies, TV shows, or actors using a powerful search feature, making it easy to find desired content quickly.
+
+## Development Server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Code Scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
@@ -14,14 +25,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running Unit Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests via Jest.
 
-## Running end-to-end tests
+## Further Help
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For more help with the Angular CLI, use `ng help` or check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
