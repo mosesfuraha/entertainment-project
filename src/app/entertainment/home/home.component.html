@@ -1,6 +1,9 @@
 <div class="lg:p-5 md:p-8 font-outfit bg-transparent">
   <div class="ml-5">
-    <app-search (search)="search($event)"></app-search>
+    <app-search
+      (search)="search($event)"
+      placeholder="Search for movies or TV series"
+    ></app-search>
     <div class="">
       <app-trending [searchTerm]="searchTerms | async"></app-trending>
       <app-recommended [searchTerm]="searchTerms | async"></app-recommended>

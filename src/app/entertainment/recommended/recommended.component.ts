@@ -49,8 +49,7 @@ export class RecommendedComponent implements OnInit, OnChanges {
       map((content: ContentItem[]) =>
         content.filter(
           (item) =>
-            !item.isTrending && // Exclude trending content
-            !item.isBookmarked && // Exclude bookmarked content
+            !item.isTrending &&
             (this.searchTerm
               ? item.title
                   .toLowerCase()

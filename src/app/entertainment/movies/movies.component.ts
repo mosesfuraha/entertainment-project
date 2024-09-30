@@ -43,15 +43,12 @@ export class MoviesComponent implements OnInit {
   }
 
   private loadMoviesContent(): void {
-    this.moviesContent$ = this.store
-      .select(selectAllEntertainment)
-      .pipe(
-        map((content: ContentItem[]) =>
-          content.filter(
-            (item) => item.category === 'Movie' && !item.isBookmarked
-          )
-        )
-      );
+    this.moviesContent$ = this.store.select(selectAllEntertainment).pipe(
+      map(
+        (content: ContentItem[]) =>
+          content.filter((item) => item.category === 'Movie') // Remove bookmark filtering here
+      )
+    );
   }
 
   onSearch(term: string): void {
@@ -73,6 +70,8 @@ export class MoviesComponent implements OnInit {
                   userId: user.uid,
                 })
               );
+
+              this.loadMoviesContent();
             } else {
               Toastify({
                 text: 'Error: Unable to identify user. Please try again.',

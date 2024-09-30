@@ -21,6 +21,7 @@ export class TvSeriesComponent implements OnInit {
   @Input() searchTerm: string | null = '';
   tvSeriesContent$!: Observable<ContentItem[]>;
   isLoggedIn$!: Observable<boolean>;
+
   constructor(
     private store: Store<AppState>,
     private searchService: SearchService,
@@ -38,19 +39,17 @@ export class TvSeriesComponent implements OnInit {
           observer.complete();
         });
       });
+
     this.isLoggedIn$ = this.authService.isAuthenticated();
   }
 
   private loadTvSeriesContent(): void {
-    this.tvSeriesContent$ = this.store
-      .select(selectAllEntertainment)
-      .pipe(
-        map((content: ContentItem[]) =>
-          content.filter(
-            (item) => item.category === 'TV Series' && !item.isBookmarked
-          )
-        )
-      );
+    this.tvSeriesContent$ = this.store.select(selectAllEntertainment).pipe(
+      map(
+        (content: ContentItem[]) =>
+          content.filter((item) => item.category === 'TV Series') // We are now including all TV Series, regardless of bookmark status
+      )
+    );
   }
 
   onSearch(term: string): void {
@@ -68,10 +67,13 @@ export class TvSeriesComponent implements OnInit {
               this.store.dispatch(
                 markMovieBooked({
                   movieId: item.id,
-                  ismovieBooked: !item.isBookmarked,
+                  ismovieBooked: !item.isBookmarked, // Toggle the bookmark status
                   userId: user.uid,
                 })
               );
+
+              // Reload the content to reflect the bookmark change
+              this.loadTvSeriesContent();
             } else {
               Toastify({
                 text: 'Error: Unable to identify user. Please try again.',

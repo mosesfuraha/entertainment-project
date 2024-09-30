@@ -63,10 +63,18 @@
     (click)="togglePopup()"
   >
     <img
+      *ngIf="isLoggedIn; else noProfile"
       src="/assets/image-avatar.png"
       alt="profile"
       class="w-full h-full object-cover"
     />
+    <ng-template #noProfile>
+      <img
+        src="/assets/avatar-no-profile.png"
+        alt="no-profile"
+        class="w-full h-full object-cover"
+      />
+    </ng-template>
 
     <div
       *ngIf="showPopup"

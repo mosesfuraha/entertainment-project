@@ -50,7 +50,8 @@ export class TrendingComponent implements OnInit, OnChanges {
               item.rating.toLowerCase().includes(this.searchTerm!.toLowerCase())
             : true;
 
-          return item.isTrending && !item.isBookmarked && matchesSearchTerm;
+          // Keep trending items even if they are bookmarked, but reflect the bookmark status
+          return item.isTrending && matchesSearchTerm;
         })
       )
     );
@@ -67,10 +68,13 @@ export class TrendingComponent implements OnInit, OnChanges {
               this.store.dispatch(
                 markMovieBooked({
                   movieId: item.id,
-                  ismovieBooked: !item.isBookmarked,
+                  ismovieBooked: !item.isBookmarked, // Toggle the bookmark status
                   userId: user.uid,
                 })
               );
+
+              // Reload the content to reflect the bookmark change
+              this.loadTrendingContent();
             } else {
               Toastify({
                 text: 'Error: Unable to identify user. Please try again.',

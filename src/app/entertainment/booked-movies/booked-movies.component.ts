@@ -40,7 +40,6 @@ export class BookedMoviesComponent implements OnInit {
   }
 
   toggleBookmark(movie: ContentItem): void {
-    console.log('Toggling bookmark for movie:', movie.title);
     this.store.dispatch(
       markMovieBooked({
         movieId: movie.id,
