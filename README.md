@@ -8,9 +8,13 @@ Check out the live version of the project [here](https://moses-entertainment-pro
 
 ## Features
 
-- **Bookmarking**: Users can easily add movies or TV shows to their personalized bookmark list for quick access later.
+- **Bookmarking**: Users can easily add movies or TV shows to their personalized bookmark list for quick access later. 
+  - *Note for new users*: If you attempt to bookmark content while not logged in, you'll be prompted to create an account. Simply click on the profile avatar in the top right corner to sign up or log in, ensuring your bookmarks are saved and accessible across sessions.
+
 - **Authentication**: Secure user authentication is implemented, allowing users to sign up, log in, and manage their accounts safely. This ensures a personalized experience for each user.
+
 - **Dynamic Content**: The project dynamically loads trending movies and TV shows, displaying recommendations based on user preferences.
+
 - **Search Functionality**: Users can search for specific movies, TV shows, or actors using a powerful search feature, making it easy to find desired content quickly.
 
 ## Development Server
